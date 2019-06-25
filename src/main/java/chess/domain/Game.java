@@ -6,31 +6,31 @@ import java.util.Objects;
 
 public class Game {
 	private final Board board;
-	private Piece.Color currentColor;
+	private Turn turn;
 
-	private Game(final Board board) {
+	private Game(final Board board, final Piece.Color color) {
 		this.board = board;
-		this.currentColor = Piece.Color.WHITE;
+		this.turn = new Turn(color, ValidTwoPlayerRule.getInstance());
 	}
 
-	public static Game from(Board board) {
-		return new Game(board);
+	public static Game of(Board board, Piece.Color color) {
+		return new Game(board, color);
 	}
 
 	public boolean action(Position origin, Position target) {
-		if (board.isSameColor(origin, currentColor) && board.action(origin, target)) {
-			currentColor = changeColor();
+		if (board.isSameColor(origin, turn.currentColor()) && board.action(origin, target)) {
+			changeColor();
 			return true;
 		}
 		return false;
 	}
 
-	private Piece.Color changeColor() {
-		return currentColor == Piece.Color.WHITE ? Piece.Color.BLACK : Piece.Color.WHITE;
+	private void changeColor() {
+		this.turn.switchColor();
 	}
 
 	public Piece.Color currentColor() {
-		return currentColor;
+		return turn.currentColor();
 	}
 
 	public double scoreOfColor(final Piece.Color color) {
@@ -45,14 +45,14 @@ public class Game {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (!(o instanceof Game)) return false;
 		Game game = (Game) o;
 		return Objects.equals(board, game.board) &&
-				currentColor == game.currentColor;
+				Objects.equals(turn, game.turn);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(board, currentColor);
+		return Objects.hash(board, turn);
 	}
 }

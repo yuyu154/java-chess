@@ -16,7 +16,7 @@ public class ChessService {
 
 	public Game initGame() {
 		Board board = new Board(BoardGenerator.generate());
-		return Game.from(board);
+		return Game.of(board, Piece.Color.WHITE);
 	}
 
 	public boolean action(final Game game, final String originInput, final String targetInput, final long roomId) {
@@ -36,7 +36,7 @@ public class ChessService {
 
 	public Game load(final long roomId) {
 		Board board = new Board(BoardGenerator.generate());
-		Game game = Game.from(board);
+		Game game = Game.of(board, Piece.Color.WHITE);
 		List<CommandDto> commandDtos = findByRoomId(roomId);
 		for (final CommandDto commandDto : commandDtos) {
 			Position origin = convertToPosition(commandDto.getOrigin());

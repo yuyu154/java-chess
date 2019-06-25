@@ -12,7 +12,7 @@ public class GameTest {
 	@BeforeEach
 	public void setUp() {
 		Board board = new Board(BoardGenerator.generate());
-		game = Game.from(board);
+		game = Game.of(board, Piece.Color.WHITE);
 	}
 
 	@Test
