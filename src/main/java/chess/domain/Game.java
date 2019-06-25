@@ -19,13 +19,13 @@ public class Game {
 
 	public boolean action(Position origin, Position target) {
 		if (board.isSameColor(origin, turn.currentColor()) && board.action(origin, target)) {
-			changeColor();
+			changeTurn();
 			return true;
 		}
 		return false;
 	}
 
-	private void changeColor() {
+	private void changeTurn() {
 		this.turn.switchColor();
 	}
 
