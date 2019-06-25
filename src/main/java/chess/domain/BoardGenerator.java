@@ -6,6 +6,8 @@ import java.util.*;
 
 public class BoardGenerator {
 	private static final List<MoveRule> MOVE_RULES;
+	private static final Piece.Color TOP_COLOR = Piece.Color.BLACK;
+	private static final Piece.Color BOTTOM_COLOR = Piece.Color.WHITE;
 	private static final int PAWN_OFFSET = 1;
 	private static final int ROW_OF_TOP_PAWN = Row.MAX - PAWN_OFFSET;
 	private static final int ROW_OF_BOTTOM_PAWN = Row.MIN + PAWN_OFFSET;
@@ -25,16 +27,17 @@ public class BoardGenerator {
 
 	public static Map<Position, Square> generate() {
 		Map<Position, Square> map = new TreeMap<>();
-		putPiecesOfColor(map, Piece.Color.BLACK, Row.MAX);
-		putTopPawnsOfColor(map, Piece.Color.BLACK, ROW_OF_TOP_PAWN);
+		putPiecesOfColor(map, TOP_COLOR, Row.MAX);
+		putTopPawnsOfColor(map, TOP_COLOR, ROW_OF_TOP_PAWN);
 		putEmpty(map, ROW_OF_EMPTY_START, ROW_OF_EMPTY_END);
-		putBottomPawnsOfColor(map, Piece.Color.WHITE, ROW_OF_BOTTOM_PAWN);
-		putPiecesOfColor(map, Piece.Color.WHITE, Row.MIN);
+		putBottomPawnsOfColor(map, BOTTOM_COLOR, ROW_OF_BOTTOM_PAWN);
+		putPiecesOfColor(map, BOTTOM_COLOR, Row.MIN);
 
 		return map;
 	}
 
-	private static void putPiecesOfColor(final Map<Position, Square> map, final Piece.Color color, final int rowIndex) {
+	private static void putPiecesOfColor(final Map<Position, Square> map, final Piece.Color color
+			, final int rowIndex) {
 		List<Position> positions = getColumnsOfRow(rowIndex);
 		final int columnSize = positions.size();
 		for (int i = 0; i < columnSize; i++) {
@@ -42,7 +45,8 @@ public class BoardGenerator {
 		}
 	}
 
-	private static void putTopPawnsOfColor(final Map<Position, Square> map, final Piece.Color color, final int rowIndex) {
+	private static void putTopPawnsOfColor(final Map<Position, Square> map, final Piece.Color color
+			, final int rowIndex) {
 		List<Position> positions = getColumnsOfRow(rowIndex);
 		Piece piece = Piece.of(color, Pawn.FIRST_TOP);
 		putPawns(map, positions, piece);
