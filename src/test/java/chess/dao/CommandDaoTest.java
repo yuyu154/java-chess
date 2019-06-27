@@ -25,7 +25,6 @@ public class CommandDaoTest {
 		DbConnector dbConnector = new DbConnector(DataSource.getInstance());
 		commandDao = CommandDao.from(dbConnector);
 		roomDao = RoomDao.from(dbConnector);
-		roomDao.add();
 		new TableCreator(dbConnector).create();
 	}
 

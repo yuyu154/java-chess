@@ -17,7 +17,6 @@ ALTER TABLE `command`
     REFERENCES room(id);
 
   INSERT INTO room() VALUES ();
-
   INSERT INTO command(origin, target, round, room_id) VALUES ('a2', 'a4', 1, 1);
   INSERT INTO command(origin, target, round, room_id) VALUES ('h7', 'h6', 2, 1);
   INSERT INTO command(origin, target, round, room_id) VALUES ('a4', 'a5', 3, 1);
