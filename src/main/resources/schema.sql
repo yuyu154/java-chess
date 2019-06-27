@@ -4,13 +4,17 @@ CREATE TABLE `command` (
   `target` VARCHAR(10) NOT NULL,
   `round` BIGINT UNSIGNED NOT NULL,
   `room_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`));
+   PRIMARY KEY (`id`));
 
 CREATE TABLE room (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   status TINYINT(1) NOT NULL DEFAULT 0,
   winner VARCHAR (30),
   PRIMARY KEY(id));
+
+ALTER TABLE `command`
+    ADD FOREIGN KEY (room_id)
+    REFERENCES room(id);
 
   INSERT INTO room() VALUES ();
 

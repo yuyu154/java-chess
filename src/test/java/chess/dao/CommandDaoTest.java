@@ -17,12 +17,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandDaoTest {
 	private CommandDao commandDao;
-	private long roomId = 10L;
+	private RoomDao roomDao;
+	private long roomId = 1L;
 
 	@BeforeEach
 	public void setUp() throws Exception {
 		DbConnector dbConnector = new DbConnector(DataSource.getInstance());
 		commandDao = CommandDao.from(dbConnector);
+		roomDao = RoomDao.from(dbConnector);
+		roomDao.add();
 		new TableCreator(dbConnector).create();
 	}
 

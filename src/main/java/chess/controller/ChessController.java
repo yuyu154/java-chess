@@ -66,21 +66,6 @@ public class ChessController {
 		return null;
 	}
 
-	public Map<String, Object> end(final Request req) {
-		Map<String, Object> model = new HashMap<>();
-		long roomId = Long.parseLong(req.queryParams("roomId"));
-
-		Game game = req.session().attribute("game");
-		Piece.Color winner = game.currentColor();
-
-		roomService.updateStatus(roomId, winner);
-
-		model.put("winner", winner);
-		model.put("whiteScore", game.scoreOfColor(Piece.Color.WHITE));
-		model.put("blackScore", game.scoreOfColor(Piece.Color.BLACK));
-		return model;
-	}
-
 	public Object load(final Request req, final Response res) {
 		long roomId = Long.parseLong(req.queryParams("roomId"));
 		Game game = chessService.load(roomId);
@@ -97,6 +82,21 @@ public class ChessController {
 		model.put("whiteScore", game.scoreOfColor(Piece.Color.WHITE));
 		model.put("blackScore", game.scoreOfColor(Piece.Color.BLACK));
 		model.put("roomId", req.queryParams("roomId"));
+		return model;
+	}
+
+	public Map<String, Object> end(final Request req) {
+		Map<String, Object> model = new HashMap<>();
+		long roomId = Long.parseLong(req.queryParams("roomId"));
+
+		Game game = req.session().attribute("game");
+		Piece.Color winner = game.currentColor();
+
+		roomService.updateStatus(roomId, winner);
+
+		model.put("winner", winner);
+		model.put("whiteScore", game.scoreOfColor(Piece.Color.WHITE));
+		model.put("blackScore", game.scoreOfColor(Piece.Color.BLACK));
 		return model;
 	}
 }
