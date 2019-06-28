@@ -26,6 +26,8 @@ public class CommandDaoTest {
 		commandDao = CommandDao.from(dbConnector);
 		roomDao = RoomDao.from(dbConnector);
 		new TableCreator(dbConnector).create();
+		commandDao.deleteAll();
+		roomDao.deleteAll();
 	}
 
 	@Test
@@ -33,7 +35,7 @@ public class CommandDaoTest {
 		Position origin = Position.of("1", "a");
 		Position target = Position.of("2", "a");
 		long round = 1;
-		long room_id = 2;
+		long room_id = 1;
 		CommandDto commandDto = new CommandDto();
 		commandDto.setTarget(origin.toString());
 		commandDto.setOrigin(target.toString());
@@ -46,6 +48,7 @@ public class CommandDaoTest {
 	@Test
 	public void findByRoomIdTest() {
 		final long roundId = 100;
+		roomDao.add();
 		CommandDto commandDto = new CommandDto();
 		commandDto.setTarget("a1");
 		commandDto.setOrigin("a2");
@@ -59,6 +62,8 @@ public class CommandDaoTest {
 
 	@Test
 	public void findLatestRoundByRoomIdTest() {
+		roomDao.add();
+		
 		final int firstRoundId = 1;
 		CommandDto commandDto = new CommandDto();
 		commandDto.setTarget("a1");
@@ -87,5 +92,6 @@ public class CommandDaoTest {
 	@AfterEach
 	public void tearDown() {
 		commandDao.deleteAll();
+		roomDao.deleteAll();
 	}
 }
