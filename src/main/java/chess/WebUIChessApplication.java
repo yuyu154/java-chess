@@ -40,20 +40,17 @@ public class WebUIChessApplication {
 		get("/chess/start", (req, res) ->
 				render(chessController.initialize(req), "board.html")
 		);
-
 		get("/chess/show", (req, res) ->
 				render(chessController.show(req), "board.html")
 		);
-
 		post("/chess/action", chessController::action);
-
-		get("/end", (req, res) -> render(chessController.end(req), "end.html"));
-
 		get("/chess/load", chessController::load);
-
 		get("/chess/score", (req, res) ->
 				render(chessController.score(req), "score.html")
 		);
+		get("/end", (req, res) -> render(chessController.end(req), "end.html"));
+
+
 
         exception(GameOverException.class, (exception, req, res) -> {
 			long roomId = Long.parseLong(req.queryParams("roomId"));

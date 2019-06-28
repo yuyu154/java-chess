@@ -87,4 +87,12 @@ public class Square {
 	public int hashCode() {
 		return Objects.hash(position, piece);
 	}
+
+	@Override
+	public String toString() {
+		return "Square{" +
+				"position=" + position +
+				", piece=" + piece +
+				'}';
+	}
 }
