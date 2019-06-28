@@ -12,9 +12,9 @@ CREATE TABLE room (
   winner VARCHAR (30),
   PRIMARY KEY(id));
 
-ALTER TABLE `command`
-    ADD FOREIGN KEY (room_id)
-    REFERENCES room(id);
+-- ALTER TABLE `command`
+--     ADD FOREIGN KEY (room_id)
+--     REFERENCES room(id);
 
   INSERT INTO room() VALUES ();
   INSERT INTO command(origin, target, round, room_id) VALUES ('a2', 'a4', 1, 1);

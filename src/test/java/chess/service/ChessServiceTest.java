@@ -4,6 +4,7 @@ import chess.config.DataSource;
 import chess.config.DbConnector;
 import chess.config.TableCreator;
 import chess.dao.CommandDao;
+import chess.dao.RoomDao;
 import chess.domain.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ChessServiceTest {
 	private ChessService chessService;
+	private RoomService roomService;
 	private Board board;
 
 	@BeforeEach
@@ -26,8 +28,10 @@ public class ChessServiceTest {
 		tableCreator.create();
 
 		CommandDao commandDao = CommandDao.from(dbConnector);
+		RoomDao roomDao = RoomDao.from(dbConnector);
 
 		chessService = new ChessService(commandDao);
+		roomService = new RoomService(roomDao);
 		board = new Board(BoardGenerator.generate());
 		chessService.deleteAll();
 	}
@@ -80,14 +84,15 @@ public class ChessServiceTest {
 
 	@Test
 	public void loadTest() {
-		final long roomId = 1;
+		final long roomId = 1L;
+		roomService.openRoom();
+
 		Game expected = Game.of(board, Piece.Color.WHITE);
 		Position origin = Position.of("2", "b");
 		Position target = Position.of("4", "b");
 		expected.action(origin, target);
 
-		Board newBoard = new Board(BoardGenerator.generate());
-		Game game = Game.of(newBoard, Piece.Color.WHITE);
+		Game game = chessService.initGame();
 		chessService.action(game, "b2", "b4", roomId);
 		Game actual = chessService.load(roomId);
 
@@ -106,5 +111,6 @@ public class ChessServiceTest {
 	@AfterEach
 	public void tearDown() {
 		chessService.deleteAll();
+		roomService.deleteAll();
 	}
 }

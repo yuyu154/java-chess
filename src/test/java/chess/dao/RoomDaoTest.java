@@ -5,6 +5,7 @@ import chess.config.DbConnector;
 import chess.config.TableCreator;
 import chess.domain.Piece;
 import chess.dto.RoomDto;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,12 +17,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RoomDaoTest {
 	private RoomDao roomDao;
+	private CommandDao commandDao;
 
 	@BeforeEach
 	public void setUp() throws Exception {
 		DbConnector dbConnector = new DbConnector(DataSource.getInstance());
 		roomDao = RoomDao.from(dbConnector);
+		commandDao = CommandDao.from(dbConnector);
 		new TableCreator(dbConnector).create();
+		commandDao.deleteAll();
 		roomDao.deleteAll();
 	}
 
@@ -97,4 +101,8 @@ public class RoomDaoTest {
 		assertEquals(expected, actual);
 	}
 
+	@AfterEach
+	public void tearDown() {
+		roomDao.deleteAll();
+	}
 }
