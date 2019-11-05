@@ -1,6 +1,6 @@
 package chess.domain.moverule;
 
-import chess.domain.Position;
+import chess.domain.chess.Position;
 
 public class Rook extends AbstractMoveRule {
 	private static Rook INSTANCE = new Rook();

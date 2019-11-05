@@ -1,7 +1,7 @@
 package chess.service;
 
 import chess.dao.RoomDao;
-import chess.domain.Piece;
+import chess.domain.chess.Piece;
 import chess.dto.RoomDto;
 
 import java.util.List;

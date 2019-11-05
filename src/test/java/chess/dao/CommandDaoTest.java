@@ -3,7 +3,7 @@ package chess.dao;
 import chess.config.DataSource;
 import chess.config.DbConnector;
 import chess.config.TableCreator;
-import chess.domain.Position;
+import chess.domain.chess.Position;
 import chess.dto.CommandDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

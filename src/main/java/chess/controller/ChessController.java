@@ -1,8 +1,8 @@
 package chess.controller;
 
-import chess.domain.Game;
-import chess.domain.Piece;
-import chess.domain.Square;
+import chess.domain.chess.Game;
+import chess.domain.chess.Piece;
+import chess.domain.chess.Square;
 import chess.service.ChessService;
 import chess.service.RoomService;
 import spark.Request;

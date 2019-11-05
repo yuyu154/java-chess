@@ -1,6 +1,6 @@
 package chess.utils;
 
-import chess.domain.Position;
+import chess.domain.chess.Position;
 
 public class PositionConverter {
 	private static final String DELIMITER = "";

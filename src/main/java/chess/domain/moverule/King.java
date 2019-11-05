@@ -1,6 +1,6 @@
 package chess.domain.moverule;
 
-import chess.domain.Position;
+import chess.domain.chess.Position;
 
 public class King extends AbstractMoveRule {
 	private static King INSTANCE = new King();

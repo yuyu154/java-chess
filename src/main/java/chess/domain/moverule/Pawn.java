@@ -1,7 +1,7 @@
 package chess.domain.moverule;
 
-import chess.domain.MoveRule;
-import chess.domain.Position;
+import chess.domain.chess.MoveRule;
+import chess.domain.chess.Position;
 
 public enum Pawn implements MoveRule {
 	FIRST_TOP(-2),

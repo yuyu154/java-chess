@@ -1,4 +1,4 @@
-package chess.domain;
+package chess.domain.chess;
 
 public interface ValidTurnRule {
     boolean isValidColor(final Piece.Color color);

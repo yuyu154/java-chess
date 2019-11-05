@@ -1,6 +1,6 @@
 package chess.domain.moverule;
 
-import chess.domain.Position;
+import chess.domain.chess.Position;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

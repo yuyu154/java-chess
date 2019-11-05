@@ -1,5 +1,9 @@
 package chess.domain;
 
+import chess.domain.chess.MoveRule;
+import chess.domain.chess.Piece;
+import chess.domain.chess.Position;
+import chess.domain.chess.Square;
 import chess.domain.moverule.King;
 import chess.domain.moverule.Rook;
 import chess.exception.GameOverException;

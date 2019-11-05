@@ -1,4 +1,4 @@
-package chess.domain;
+package chess.domain.chess;
 
 import chess.domain.moverule.*;
 

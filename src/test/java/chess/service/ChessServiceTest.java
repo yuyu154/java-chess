@@ -5,12 +5,11 @@ import chess.config.DbConnector;
 import chess.config.TableCreator;
 import chess.dao.CommandDao;
 import chess.dao.RoomDao;
-import chess.domain.*;
+import chess.domain.chess.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,7 +1,7 @@
 package chess.service;
 
 import chess.dao.CommandDao;
-import chess.domain.*;
+import chess.domain.chess.*;
 import chess.dto.CommandDto;
 import chess.utils.PositionConverter;
 

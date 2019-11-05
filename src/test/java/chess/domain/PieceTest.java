@@ -1,7 +1,8 @@
 package chess.domain;
 
+import chess.domain.chess.Piece;
+import chess.domain.chess.Position;
 import chess.domain.moverule.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
