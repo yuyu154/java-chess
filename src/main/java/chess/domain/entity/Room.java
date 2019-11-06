@@ -1,6 +1,7 @@
 package chess.domain.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ROOM_ADAPT")
@@ -12,12 +13,12 @@ public class Room {
     private Long id;
 
     @Column(name = "status")
-    private int status;
+    private Integer status;
 
     @Column
     private String winner;
 
-    public Room() {
+    protected Room() {
     }
 
     public Room(int status, String winner) {
@@ -35,5 +36,18 @@ public class Room {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return Objects.equals(id, room.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
