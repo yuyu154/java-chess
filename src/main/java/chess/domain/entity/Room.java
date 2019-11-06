@@ -17,8 +17,19 @@ public class Room {
     @Column
     private String winner;
 
+    public Room() {
+    }
+
     public Room(int status, String winner) {
         this.status = status;
         this.winner = winner;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getWinner() {
+        return winner;
     }
 }

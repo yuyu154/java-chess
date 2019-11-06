@@ -15,7 +15,6 @@ public class TestJpa {
 
     @Test
     public void test() {
-
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("jpachess");
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = em.getTransaction();
