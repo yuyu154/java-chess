@@ -3,6 +3,7 @@ package chess.domain.entity;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "COMMAND_ADAPT")
@@ -22,7 +23,7 @@ public class Command {
     @Column(name = "round")
     private Long round;
 
-    @ManyToOne(targetEntity = Room.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(targetEntity = Room.class)
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private Room room;
 
@@ -54,5 +55,18 @@ public class Command {
 
     public Room getRoom() {
         return room;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Command command = (Command) o;
+        return Objects.equals(id, command.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

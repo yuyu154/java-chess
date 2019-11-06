@@ -32,4 +32,8 @@ public class Room {
     public String getWinner() {
         return winner;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
