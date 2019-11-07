@@ -1,4 +1,4 @@
-package chess.domain;
+package chess.domain.chess;
 
 public class ValidTwoPlayerRule implements ValidTurnRule {
     private static final ValidTwoPlayerRule INSTANCE = new ValidTwoPlayerRule();

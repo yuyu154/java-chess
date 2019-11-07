@@ -2,6 +2,9 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
     <persistence-unit name="jpachess">
 
+        <class>chess.domain.entity.Command</class>
+        <class>chess.domain.entity.Room</class>
+
         <properties>
 
             <!-- 필수 속성 -->

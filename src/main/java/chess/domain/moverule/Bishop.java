@@ -1,6 +1,6 @@
 package chess.domain.moverule;
 
-import chess.domain.Position;
+import chess.domain.chess.Position;
 
 public class Bishop extends AbstractMoveRule {
 	private static Bishop INSTANCE = new Bishop();

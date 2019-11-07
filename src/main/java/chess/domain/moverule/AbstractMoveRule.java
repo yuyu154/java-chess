@@ -1,7 +1,7 @@
 package chess.domain.moverule;
 
-import chess.domain.MoveRule;
-import chess.domain.Position;
+import chess.domain.chess.MoveRule;
+import chess.domain.chess.Position;
 
 public abstract class AbstractMoveRule implements MoveRule {
 	private final double score;

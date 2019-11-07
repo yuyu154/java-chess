@@ -1,6 +1,7 @@
 package chess.domain;
 
-import chess.domain.moverule.King;
+import chess.domain.chess.Piece;
+import chess.domain.chess.PieceSymbol;
 import chess.domain.moverule.Pawn;
 import org.junit.jupiter.api.Test;
 

@@ -1,11 +1,12 @@
-package chess.domain;
+package chess.domain.chess;
 
 import java.util.*;
 
 public class Row implements Comparable<Row> {
+	public static final int MIN = 1;
+	public static final int MAX = 8;
+
 	private static final Map<Integer, Row> ROWS = new HashMap<>();
-	static final int MIN = 1;
-	static final int MAX = 8;
 
 	private final int row;
 
@@ -19,7 +20,7 @@ public class Row implements Comparable<Row> {
 		this.row = row;
 	}
 
-	static Row from(final String row) {
+	public static Row from(final String row) {
 		try {
 			return from(Integer.parseInt(row));
 		} catch (NumberFormatException e) {
@@ -27,7 +28,7 @@ public class Row implements Comparable<Row> {
 		}
 	}
 
-	static Row from(final int row) {
+	public static Row from(final int row) {
 		Optional<Row> optRow = Optional.ofNullable(ROWS.get(row));
 		return optRow.orElseThrow(IllegalArgumentException::new);
 	}

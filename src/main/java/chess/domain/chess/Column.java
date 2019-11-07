@@ -1,11 +1,12 @@
-package chess.domain;
+package chess.domain.chess;
 
 import java.util.*;
 
 public class Column implements Comparable<Column> {
-	private static final Map<String, Column> COLUMNS = new HashMap<>();
 	static final char MIN = 'a';
-	static final char MAX = 'h';
+	public static final char MAX = 'h';
+
+	private static final Map<String, Column> COLUMNS = new HashMap<>();
 
 	private final int column;
 
@@ -20,11 +21,11 @@ public class Column implements Comparable<Column> {
 		this.column = column;
 	}
 
-	static Column from(final int column) {
+	public static Column from(final int column) {
 		return from(String.valueOf((char) column));
 	}
 
-	static Column from(final String column) {
+	public static Column from(final String column) {
 		Optional<Column> optColumn = Optional.ofNullable(COLUMNS.get(column));
 		return optColumn.orElseThrow(IllegalArgumentException::new);
 	}

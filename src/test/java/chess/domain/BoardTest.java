@@ -1,11 +1,10 @@
 package chess.domain;
 
-import chess.domain.moverule.Rook;
+import chess.domain.chess.Board;
+import chess.domain.chess.BoardGenerator;
+import chess.domain.chess.Position;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 

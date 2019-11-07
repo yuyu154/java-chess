@@ -1,5 +1,8 @@
 package chess.domain;
 
+import chess.domain.chess.Column;
+import chess.domain.chess.Position;
+import chess.domain.chess.Row;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
