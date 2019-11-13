@@ -6,6 +6,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "ROOM_ADAPT")
 public class Room {
+    public static final String NO_WINNER = "EMPTY";
 
     @Id
     @Column(name = "room_id")
@@ -13,7 +14,8 @@ public class Room {
     private Long id;
 
     @Column(name = "status")
-    private Integer status;
+    @Enumerated
+    private RoomStatus status;
 
     @Column
     private String winner;
@@ -21,12 +23,12 @@ public class Room {
     protected Room() {
     }
 
-    public Room(int status, String winner) {
+    public Room(RoomStatus status, String winner) {
         this.status = status;
         this.winner = winner;
     }
 
-    public int getStatus() {
+    public RoomStatus getStatus() {
         return status;
     }
 
@@ -36,6 +38,13 @@ public class Room {
 
     public Long getId() {
         return id;
+    }
+
+    public void checkWinner(String name) {
+        if (this.winner.equals(NO_WINNER)) {
+            this.status = RoomStatus.UNAVAILABLE;
+            this.winner = name;
+        }
     }
 
     @Override

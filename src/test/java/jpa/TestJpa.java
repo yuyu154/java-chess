@@ -2,6 +2,7 @@ package jpa;
 
 import chess.domain.entity.Command;
 import chess.domain.entity.Room;
+import chess.domain.entity.RoomStatus;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
@@ -19,7 +20,7 @@ public class TestJpa {
         EntityTransaction entityTransaction = em.getTransaction();
 
         entityTransaction.begin();
-        em.persist(new Room(0, "nada"));
+        em.persist(new Room(RoomStatus.AVAILABLE, "nada"));
         Room room = em.find(Room.class, 1L);
         em.persist(new Command("a2", "a4", 1L, room));
         Command command = em.find(Command.class, 1L);
