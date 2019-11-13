@@ -1,17 +1,28 @@
 package chess.service;
 
 import chess.dao.CommandDao;
+import chess.dao.CommandRepository;
+import chess.dao.RoomRepository;
 import chess.domain.chess.*;
+import chess.domain.entity.Command;
+import chess.domain.entity.Room;
 import chess.dto.CommandDto;
 import chess.utils.PositionConverter;
 
 import java.util.List;
 
 public class ChessService {
-	private final CommandDao commandDao;
+	private CommandDao commandDao;
+	private CommandRepository commandRepository;
+	private RoomRepository roomRepository;
 
 	public ChessService(final CommandDao commandDao) {
 		this.commandDao = commandDao;
+	}
+
+	public ChessService(CommandRepository commandRepository, RoomRepository roomRepository) {
+		this.commandRepository = commandRepository;
+		this.roomRepository = roomRepository;
 	}
 
 	public Game initGame() {
@@ -23,12 +34,16 @@ public class ChessService {
 		final Position origin = convertToPosition(originInput);
 		final Position target = convertToPosition(targetInput);
 		if (game.action(origin, target)) {
-			CommandDto commandDto = new CommandDto();
-			commandDto.setOrigin(origin.toString());
-			commandDto.setTarget(target.toString());
-			commandDto.setRoomId(roomId);
-			commandDto.setRound(commandDao.findLatestRoundByRoomId(roomId));
-			commandDao.add(commandDto);
+//			CommandDto commandDto = new CommandDto();
+//			commandDto.setOrigin(origin.toString());
+//			commandDto.setTarget(target.toString());
+//			commandDto.setRoomId(roomId);
+//			commandDto.setRound(commandDao.findLatestRoundByRoomId(roomId));
+//			commandDao.add(commandDto);
+			Room room = roomRepository.findById(roomId)
+					.orElseThrow(IllegalArgumentException::new);
+			commandRepository
+					.add(new Command(originInput, targetInput, commandRepository.findLatestRoundByRoomId(room), room));
 			return true;
 		}
 		return false;

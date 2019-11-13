@@ -1,10 +1,7 @@
 package chess.service;
 
-import chess.config.DataSource;
-import chess.config.DbConnector;
-import chess.config.TableCreator;
-import chess.dao.CommandDao;
-import chess.dao.RoomDao;
+import chess.dao.CommandRepository;
+import chess.dao.RoomRepository;
 import chess.domain.chess.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,16 +18,20 @@ public class ChessServiceTest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		DataSource dataSource = DataSource.getInstance();
-		DbConnector dbConnector = new DbConnector(dataSource);
-		TableCreator tableCreator = new TableCreator(dbConnector);
-		tableCreator.create();
+//		DataSource dataSource = DataSource.getInstance();
+//		DbConnector dbConnector = new DbConnector(dataSource);
+//		TableCreator tableCreator = new TableCreator(dbConnector);
+//		tableCreator.create();
+//
+//		CommandDao commandDao = CommandDao.from(dbConnector);
+//		RoomDao roomDao = RoomDao.from(dbConnector);
+//		chessService = new ChessService(commandDao);
+//		roomService = new RoomService(roomDao);
 
-		CommandDao commandDao = CommandDao.from(dbConnector);
-		RoomDao roomDao = RoomDao.from(dbConnector);
-
-		chessService = new ChessService(commandDao);
-		roomService = new RoomService(roomDao);
+		CommandRepository commandRepository = new CommandRepository();
+		RoomRepository roomRepository = new RoomRepository();
+		roomService = new RoomService(roomRepository);
+		chessService = new ChessService(commandRepository, roomRepository);
 		board = new Board(BoardGenerator.generate());
 		chessService.deleteAll();
 	}
