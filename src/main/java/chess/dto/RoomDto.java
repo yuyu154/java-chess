@@ -1,5 +1,7 @@
 package chess.dto;
 
+import chess.domain.entity.RoomStatus;
+
 import java.util.Objects;
 
 public class RoomDto {
@@ -7,6 +9,21 @@ public class RoomDto {
 	private long id;
 	private boolean status;
 	private String winner;
+
+	public RoomDto() {
+	}
+
+	//@TODO 고치기
+	public RoomDto(long id, RoomStatus status, String winner) {
+		this.id = id;
+		if (RoomStatus.AVAILABLE == status) {
+			this.status = true;
+		}
+		else if (RoomStatus.UNAVAILABLE == status) {
+			this.status = false;
+		}
+		this.winner = winner;
+	}
 
 	public void setId(final long id) {
 		this.id = id;

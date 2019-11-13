@@ -1,10 +1,8 @@
 package chess.service;
 
-import chess.config.DataSource;
-import chess.config.DbConnector;
-import chess.config.TableCreator;
-import chess.dao.RoomDao;
+import chess.dao.RoomRepository;
 import chess.domain.chess.Piece;
+import chess.domain.entity.Room;
 import chess.dto.RoomDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +19,7 @@ public class RoomServiceTest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		DataSource dataSource = DataSource.getInstance();
-		DbConnector dbConnector = new DbConnector(dataSource);
-		TableCreator tableCreator = new TableCreator(dbConnector);
-		tableCreator.create();
-
-		RoomDao roomDao = RoomDao.from(dbConnector);
-		roomService = new RoomService(roomDao);
+		roomService = new RoomService(new RoomRepository());
 		roomService.deleteAll();
 	}
 
@@ -38,9 +30,8 @@ public class RoomServiceTest {
 
 	@Test
 	public void getLatestIdTest() {
-		long expected = 1;
-		roomService.openRoom();
-		assertEquals(expected, roomService.latestId());
+		Room room = roomService.openRoom();
+		assertEquals(room.getId(), roomService.latestId());
 	}
 
 	@Test
@@ -56,20 +47,13 @@ public class RoomServiceTest {
 
 	@Test
 	void findAllByOngoing() {
-		long roomId = 1;
 		Piece.Color winner = Piece.Color.BLACK;
-		roomService.openRoom();
-		roomService.openRoom();
-		roomService.updateStatus(roomId, winner);
+		Room finishedRoom = roomService.openRoom();
+		Room notFinishedRoom = roomService.openRoom();
+		roomService.updateStatus(finishedRoom.getId(), winner);
 
 		List<RoomDto> expected = new ArrayList<>();
-		long expectedId = 2;
-		boolean ongoing = false;
-
-		RoomDto roomDto = new RoomDto();
-		roomDto.setId(expectedId);
-		roomDto.setWinner(null);
-		roomDto.setStatus(ongoing);
+		RoomDto roomDto = new RoomDto(notFinishedRoom.getId(), notFinishedRoom.getStatus(), notFinishedRoom.getWinner());
 		expected.add(roomDto);
 
 		assertEquals(expected, roomService.findAllByOngoing());

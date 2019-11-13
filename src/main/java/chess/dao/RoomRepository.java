@@ -1,6 +1,7 @@
 package chess.dao;
 
 import chess.domain.entity.Room;
+import chess.domain.entity.RoomStatus;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +16,7 @@ public class RoomRepository {
         EntityManager entityManager = getEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        Room room = new Room(0, "EMPTY");
+        Room room = new Room(RoomStatus.AVAILABLE, Room.NO_WINNER);
         entityManager.persist(room);
         entityTransaction.commit();
         return room;
@@ -32,7 +33,7 @@ public class RoomRepository {
         return Optional.ofNullable(room);
     }
 
-    public List<Room> findAllByStatus(final Integer status) {
+    public List<Room> findAllByStatus(final RoomStatus status) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
@@ -43,7 +44,7 @@ public class RoomRepository {
         return rooms;
     }
 
-    public Optional<Long> getLatestId() {
+    public Long getLatestId() {
         EntityManager entityManager = getEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
@@ -51,7 +52,16 @@ public class RoomRepository {
                 entityManager.createQuery("select r.id from Room r order by r.id desc", Long.class)
                         .getResultList();
         entityTransaction.commit();
-        return Optional.ofNullable(ids.get(0));
+        return ids.get(0);
+    }
+
+    public void checkWinner(final long roomId, final String name) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        Room room = entityManager.find(Room.class, roomId);
+        room.checkWinner(name);
+        entityTransaction.commit();
     }
 
     public void deleteAll() {

@@ -2,6 +2,7 @@ package chess.dao;
 
 import chess.domain.entity.Command;
 import chess.domain.entity.Room;
+import chess.domain.entity.RoomStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ public class CommandRepositoryTest {
 
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        room = new Room(0, null);
+        room = new Room(RoomStatus.AVAILABLE, null);
         entityManager.persist(room);
         entityTransaction.commit();
     }
