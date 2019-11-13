@@ -2,7 +2,6 @@ package jpa;
 
 import chess.domain.entity.Command;
 import chess.domain.entity.Room;
-import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
